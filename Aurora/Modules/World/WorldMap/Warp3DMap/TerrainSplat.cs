@@ -326,7 +326,7 @@ namespace Aurora.Modules.WorldMap.Warp3DMap
 
         private static Bitmap FixVariableSizedRegionTerrainSize(RegionInfo region, Bitmap image)
         {
-            if (region.RegionSizeX == image.Width && region.RegionSizeY == image.Height)
+            if (region.RegionSizeX == Constants.RegionSize && region.RegionSizeY == Constants.RegionSize)
                 return image;
             Bitmap destImage = new Bitmap(region.RegionSizeX, region.RegionSizeY);
             using(TextureBrush brush = new TextureBrush(new Bitmap(image), System.Drawing.Drawing2D.WrapMode.Tile))

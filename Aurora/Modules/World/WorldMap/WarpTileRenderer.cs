@@ -176,16 +176,6 @@ namespace Aurora.Modules.WorldMap
                 warp_Object obj = (warp_Object)o;
                 obj.vertexData = null;
                 obj.triangleData = null;
-            
-            }
-            foreach(var t in renderer.Scene.materialData.Values)
-            {
-                warp_Material mat = (warp_Material)t;
-                if (mat.texture != null)
-                {
-                    mat.texture.pixel = null;
-                    mat.texture = null;
-                }
             }
             renderer.Scene.removeAllObjects();
             renderer = null;
@@ -335,7 +325,6 @@ namespace Aurora.Modules.WorldMap
                                               m_scene.AssetService, textureTerrain, 
                                               m_scene.RegionInfo);
             warp_Texture texture = new warp_Texture(image);
-            image.Dispose();
             warp_Material material = new warp_Material(texture);
             material.setReflectivity(0); // reduces tile seams a bit thanks lkalif
             renderer.Scene.addMaterial("TerrainColor", material);
@@ -612,10 +601,8 @@ namespace Aurora.Modules.WorldMap
                 Bitmap img = (Bitmap) imgDecoder.DecodeToImage(asset.Data);
                 if (img != null)
                 {
-                    ret = new warp_Texture(img);
-                    img.Dispose();
+                    return new warp_Texture(img);
                 }
-                asset.Dispose();
             }
             return ret;
         }
